@@ -3,21 +3,19 @@ import axios from "axios";
 
 const Resource = function(props) {
   const [api, setAPI] = useState(() => ({
-    path: props.path,
     loading: true,
     data: [],
-    error: false
+    error: null
   }));
 
   useEffect(() => {
     axios
-      .get(api.path)
+      .get(props.path)
       .then(data => {
         setAPI(value => ({ ...value, loading: false, data: data.data }));
       })
       .catch(error => {
-        console.log(error);
-        setAPI(value => ({ ...value, loading: false, error: true }));
+        setAPI(value => ({ ...value, loading: false, error }));
       });
   }, []);
 

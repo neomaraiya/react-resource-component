@@ -1,11 +1,11 @@
 import React from "react";
-import Resource from "./Resource";
+import { GetResource, PostResource } from "./Resource";
 import "./style.css";
 
 export default function App() {
   return (
     <div>
-      <Resource
+      <GetResource
         path="https://random-data-api.com/api/address/random_address"
         state={state => {
           if (state.loading) return <div>Loading</div>;
@@ -13,8 +13,12 @@ export default function App() {
           return <pre>{JSON.stringify(state.data, null, 2)}</pre>;
         }}
       />
-      <Resource
-        path="https://random-data-api.com/api/bank/random_bank"
+      <PostResource
+        path="https://reqres.in/api/users"
+        data={{
+          name: "Test",
+          job: "leader"
+        }}
         state={state => {
           if (state.loading) return <div>Loading</div>;
           if (state.error) return <div>Error</div>;
